@@ -1,0 +1,59 @@
+{% set name = "uppasd" %}
+{% set version = "v6.0.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/UppASD/UppASD/releases/download/{{ version }}/{{ version }}.tar.gz
+  sha256: f483bb6e0a5c75820e4a3d38894c40557548777160eabd3c152c8c356e6ca8ed
+  patches:
+    - binary-name.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('fortran') }}
+    - {{ stdlib('c') }}
+    - cmake
+    - ninja
+    - llvm-openmp  # [osx]
+    - libgomp      # [linux]
+  host:
+    - fftw
+    - libblas
+    - liblapack
+    #- vs2015_runtime  # [win]
+  #run:
+    #- openblas # [not win]
+    #- mkl      # [win]
+    #- vs2015_runtime  # [win]
+
+test:
+  source_files:
+    - examples/SimpleSystems/bccFe
+  commands:
+    - sd  # [build_platform == target_platform]
+    - cd examples/SimpleSystems/bccFe && sd  # [build_platform == target_platform]
+
+about:
+  home: https://github.com/simplejson/simplejson
+  summary: 'Simple, fast, extensible JSON encoder/decoder for Python'
+  description: |
+    simplejson is a simple, fast, complete, correct and extensible
+    JSON <https://json.org> encoder and decoder for Python 2.5+ and
+    Python 3.3+. It is pure Python code with no dependencies, but includes
+    an optional C extension for a serious speed boost.
+  license: GPL-3.0
+  license_family: GPL
+  license_file: LICENSE
+  # The doc_url and dev_url are optional.
+  doc_url: https://simplejson.readthedocs.io/
+  dev_url: https://github.com/simplejson/simplejson
+
+extra:
+  recipe-maintainers:
+    - lang-m
