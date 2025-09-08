@@ -11,12 +11,3 @@ if errorlevel 1 exit 1
 cmake --install _build --prefix %LIBRARY_PREFIX%
 if errorlevel 1 exit 1
 
-
-
-@REM setlocal
-@REM if exist "%PREFIX%\Library\lib\asdlib.lib" del /f /q "%PREFIX%\Library\lib\asdlib.lib"
-@REM if exist "%PREFIX%\Library\lib\libasdlib.lib" del /f /q "%PREFIX%\Library\lib\libasdlib.lib"
-@REM if exist "%PREFIX%\Library\lib\libasdlib.a" del /f /q "%PREFIX%\Library\lib\libasdlib.a"
-@REM if exist "%PREFIX%\lib\asdlib.lib" del /f /q "%PREFIX%\lib\asdlib.lib"
-@REM if exist "%PREFIX%\lib\libasdlib.a" del /f /q "%PREFIX%\lib\libasdlib.a"
-

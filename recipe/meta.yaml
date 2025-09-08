@@ -40,6 +40,17 @@ test:
     - sd  # [build_platform == target_platform]
     - cd examples/SimpleSystems/bccFe && sd  # [build_platform == target_platform]
 
+outputs:
+  # For now only distribute the binary but not the static library. Building a shared
+  # library would be preferable but seems to not be straightforward for UppASD (some
+  # things are hardcoded in their CMakeLists.txt).
+  - name: uppasd
+    files:
+      include:
+        - bin/sd
+      exclude:
+        - lib/libasdlib.a
+
 about:
   home: https://github.com/UppASD/UppASD
   summary: 'Atomistic spin dynamics and Monte Carlo simulations'
